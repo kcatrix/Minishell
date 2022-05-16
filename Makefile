@@ -40,7 +40,7 @@ FILES_PROG		= $(FILES_COMMON)
 
 FILES_BONUS		= ft_minishell_bonus.c $(FILES_COMMON)
 
-#testpull
+#au revoir
 
 SRCS			= $(addprefix $(SRCS_DIR),$(FILES_PROG))
 OBJS			= $(addprefix $(OBJS_DIR),$(FILES_PROG:.c=.o))
