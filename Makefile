@@ -93,15 +93,6 @@ test	:
 	@./pipex
 	@echo "########### same test with | (pipe) ################################"
 	@echo "zsh: parse error near \`|'"
-	@echo "\n########### pipex : test with no file1.txt #######################"
-	@./pipex y_test/file1.txt cat "wc -l" y_test/file2.txt
-	@echo "\n########### same test with | (pipe) ##############################"
-	@< y_test/file1.txt cat | wc -l > y_test/file2.txt
-	@echo "\n########### pipex : test with wrong first command ################"
-	@./pipex y_test/file3.txt wrongcom "wc -l" y_test/file2.txt
-	@echo "\n########### same test with | (pipe) ##############################"
-	@< y_test/file3.txt wrongcom | wc -l > y_test/file2.txt
-
 
 clean	:
 	rm -f $(OBJS)
