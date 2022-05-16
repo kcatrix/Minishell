@@ -40,6 +40,8 @@ FILES_PROG		= $(FILES_COMMON)
 
 FILES_BONUS		= $(FILES_COMMON)
 
+#testpull
+
 SRCS			= $(addprefix $(SRCS_DIR),$(FILES_PROG))
 OBJS			= $(addprefix $(OBJS_DIR),$(FILES_PROG:.c=.o))
 SRCS_BONUS		= $(addprefix $(SRCS_DIR),$(FILES_BONUS))
