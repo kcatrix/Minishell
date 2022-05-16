@@ -40,7 +40,11 @@ FILES_PROG		= $(FILES_COMMON)
 
 FILES_BONUS		= ft_minishell_bonus.c $(FILES_COMMON)
 
+<<<<<<< HEAD
 #au revoir
+=======
+#Bonjour
+>>>>>>> e5823d89d3af33ac565d79d84a80d86fd8f44976
 
 SRCS			= $(addprefix $(SRCS_DIR),$(FILES_PROG))
 OBJS			= $(addprefix $(OBJS_DIR),$(FILES_PROG:.c=.o))
