@@ -1,110 +1,60 @@
-################################# COLORS ######################################
-# This is a minimal set of ANSI/VT100 color codes
-_END=$'\x1b[0m'
-_BOLD=$'\x1b[1m'
-_UNDER=$'\x1b[4m'
-_REV=$'\x1b[7m'
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
+#    Updated: 2022/05/18 12:59:52 by tnicoue          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# Colors
-_GREY=$'\x1b[30m'
-_RED=$'\x1b[31m'
-_GREEN=$'\x1b[32m'
-_YELLOW=$'\x1b[33m'
-_BLUE=$'\x1b[34m'
-_PURPLE=$'\x1b[35m'
-_CYAN=$'\x1b[36m'
-_WHITE=$'\x1b[37m'
 
-# Inverted, i.e. colored backgrounds
-_IGREY=$'\x1b[40m'
-_IRED=$'\x1b[41m'
-_IGREEN=$'\x1b[42m'
-_IYELLOW=$'\x1b[43m'
-_IBLUE=$'\x1b[44m'
-_IPURPLE=$'\x1b[45m'
-_ICYAN=$'\x1b[46m'
-_IWHITE=$'\x1b[47m'
+NAME = Minishell
 
-############################# PARAMETERS ######################################
-NAME_PROG		= minishell
+CC = gcc
 
-NAME_BONUS		= minishell_bonus
+OBJECTS	= ./bin
+ 
+CFLAGS = -Wall -Wextra -Werror -g -pthread #-fsanitize=address
 
-SRCS_DIR		= ./srcs/
+SRCS = main.c
 
-OBJS_DIR		= ./objs/
+RM = rm -f
 
-FILES_COMMON	= ft_minishell.c
-
-FILES_PROG		= $(FILES_COMMON)
-
-FILES_BONUS		= ft_minishell_bonus.c $(FILES_COMMON)
-
-SRCS			= $(addprefix $(SRCS_DIR),$(FILES_PROG))
-OBJS			= $(addprefix $(OBJS_DIR),$(FILES_PROG:.c=.o))
-SRCS_BONUS		= $(addprefix $(SRCS_DIR),$(FILES_BONUS))
-OBJS_BONUS		= $(addprefix $(OBJS_DIR),$(FILES_BONUS:.c=.o))
-
-ifdef BONUS_FLAG
-	SRCS_COMP = $(SRCS_BONUS)
-	NAME = $(NAME_BONUS)
-	OBJS_COMP = $(OBJS_BONUS)
+ifndef BONUS
+SOURCES	= ./srcs
+OBJS	= $(SRCS:.c=.o)
 else
-	SRCS_COMP = $(SRCS)
-	NAME = $(NAME_PROG)
-	OBJS_COMP = $(OBJS)
+SOURCES	= ./srcs_bonus
+OBJS	= $(SRCS_BONUS:.c=.o)
 endif
 
-INCLUDES_DIR	= ./includes/
+all: ${NAME}
 
-CC				= gcc
+bonus:
+	@echo "\033[1;32m""Compilation de ${NAME}..."
+	@make BONUS=1 ${NAME}
 
-CFLAGS			= -Wall -Werror -Wextra
-// -g -fsanitize=address
+${NAME}: ${OBJS}
+		@echo "\033[1;36m""Compilation de ${NAME}..."
+		$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
 
-############################## RULES #########################################
-all		: $(NAME)
+${OBJECTS}/%.o: ${SOURCES}/%.c
+	@echo "Compilation de ${notdir $<}."
+	@$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
-$(OBJS_DIR)%.o		:$(SRCS_DIR)%.c
-	$(CC) $(CFLAGS) -I$(INCLUDES_DIR) -c $< -o $@
+clean :
+		@echo "\033[1;32m""Supression des fichiers binaires (.o)..."
+		${RM} ${OBJS}
 
-$(NAME)	: $(OBJS_COMP)
-	$(CC) $(OBJS_COMP) $(CFLAGS) -o $(NAME) -I $(INCLUDES_DIR)
-	clear
-	@echo "$(_GREEN)Compilation is done !$(_WHITE)"
+fclean: clean
+		@echo "\033[1;32m""Supression des executables et librairies..."
+		${RM} ${NAME}
+		${RM} *.out
+		
+re: fclean all
+	@echo "\033[0m"
 
-bonus	: 
-	@make BONUS_FLAG=1 all 
-
-norme	:
-	cd srcs
-	norminette -R CheckForbiddenSourceHeader | grep -v OK
-
-debug	: fclean
-	$(CC) -g $(SRCS) $(CFLAGS) -o $(NAME)_debug -I$(INCLUDES_DIR)
-	lldb $(NAME)_debug
-
-run		: fclean all
-	@./pipex file1 cmd1 cmd2 file2
-
-test	:
-	clear
-	@echo "########### pipex : test without argument ##########################"
-	@./pipex
-	@echo "########### same test with | (pipe) ################################"
-	@echo "zsh: parse error near \`|'"
-
-clean	:
-	rm -f $(OBJS)
-	rm -f $(OBJS_BONUS)
-	@echo "$(_GREEN)Objects cleaned !$(_WHITE)"
-
-fclean	: clean
-	rm -f $(NAME_PROG)
-	rm -f $(NAME_BONUS)
-	clear
-	@echo "$(_GREEN)All cleaned !$(_WHITE)"
-
-re		: fclean all
-
-.PHONY	: all bonus clean debug fclean norme run re test
+.PHONY: all clean fclean re
