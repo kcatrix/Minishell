@@ -12,6 +12,7 @@ int main()
 //		checkcmd(line);
 		if(strcmp(line, "exit") == 0) //souspartie
 			exit(100);
+	printf("str len = %zu\n", ft_strlen(line));
 	}
 	return(0);
 }

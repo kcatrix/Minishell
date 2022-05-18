@@ -6,7 +6,7 @@
 #    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/05/18 13:52:06 by tnicoue          ###   ########.fr        #
+#    Updated: 2022/05/18 15:22:21 by kcatrix          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SOURCES	= ./srcs_bonus
 OBJS	= $(SRCS_BONUS:.c=.o)
 endif
 
+LIBPATH = ./lib/libft/libft.a
+
 all: ${NAME}
 
 bonus:
@@ -39,7 +41,8 @@ bonus:
 
 ${NAME}: ${OBJS}
 		@echo "\033[1;36m""Compilation de ${NAME}..."
-		$(CC) $(OBJS) $(CFLAGS) libreadline.a -lreadline -lncurses -o $(NAME)
+	   	@$(MAKE) -j -s --no-print-directory -C lib/libft
+		$(CC) $(LIBPATH) $(OBJS) $(CFLAGS) libreadline.a -lreadline -lncurses -o $(NAME)
 
 ${OBJECTS}/%.o: ${SOURCES}/%.c
 	@echo "Compilation de ${notdir $<}."
@@ -47,10 +50,12 @@ ${OBJECTS}/%.o: ${SOURCES}/%.c
 
 clean :
 		@echo "\033[1;32m""Supression des fichiers binaires (.o)..."
+	   	@$(MAKE) -s --no-print-directory -C lib/libft/ clean
 		${RM} ${OBJS}
 
 fclean: clean
 		@echo "\033[1;32m""Supression des executables et librairies..."
+		@$(MAKE) -s --no-print-directory -C lib/libft/ fclean
 		${RM} ${NAME}
 		${RM} *.out
 		
@@ -58,3 +63,4 @@ re: fclean all
 	@echo "\033[0m"
 
 .PHONY: all clean fclean re
+
