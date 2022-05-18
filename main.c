@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int main(int ac, char **av, char **ev)
+int main()
 {
 	char *line;
 	while(1)
@@ -9,8 +9,21 @@ int main(int ac, char **av, char **ev)
 		if (!line[0])
 			continue;
 		add_history(line);
-		if(strcmp(line, "exit") == 0)
-			exit();
+//		checkcmd();
+
+
+
+
+
+
+
+		if(strcmp(line, "exit") == 0) //souspartie
+			exit(100);
 	}
 	return(0);
 }
+
+/*int checkcmd()
+{
+
+}*/
