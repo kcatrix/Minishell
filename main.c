@@ -2,20 +2,12 @@
 
 int main()
 {
+	char *line;
 	while(1)
 	{
-
-
-
-
-
-
-
-
-
-
-		if(ft_kata() == -1)
-			return(0);
+		line = readline("minishell >");
+		//if(ft_kata() == -1)
+		//	return(0);
 	}
-	printf("a\n");
+	return(0);
 }

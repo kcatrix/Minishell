@@ -6,7 +6,7 @@
 #    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/05/18 12:59:52 by tnicoue          ###   ########.fr        #
+#    Updated: 2022/05/18 13:52:06 by tnicoue          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 
 OBJECTS	= ./bin
  
-CFLAGS = -Wall -Wextra -Werror -g -pthread #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 SRCS = main.c
 
@@ -39,7 +39,7 @@ bonus:
 
 ${NAME}: ${OBJS}
 		@echo "\033[1;36m""Compilation de ${NAME}..."
-		$(CC) $(OBJS) $(CFLAGS) -o $(NAME)
+		$(CC) $(OBJS) $(CFLAGS) libreadline.a -lreadline -lncurses -o $(NAME)
 
 ${OBJECTS}/%.o: ${SOURCES}/%.c
 	@echo "Compilation de ${notdir $<}."
