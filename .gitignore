@@ -19,7 +19,7 @@
 
 # Libraries
 *.lib
-*.a
+
 *.la
 *.lo
 

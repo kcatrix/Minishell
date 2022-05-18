@@ -9,14 +9,7 @@ int main()
 		if (!line[0])
 			continue;
 		add_history(line);
-//		checkcmd();
-
-
-
-
-
-
-
+//		checkcmd(line);
 		if(strcmp(line, "exit") == 0) //souspartie
 			exit(100);
 	}
@@ -25,5 +18,6 @@ int main()
 
 /*int checkcmd()
 {
+	if (ACCESS(line) == 
 
 }*/
