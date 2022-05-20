@@ -9,4 +9,10 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+typedef struct s_stock
+{
+    char **derive;
+    char 
+}   t_stock;
+
 #endif
