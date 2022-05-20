@@ -6,7 +6,7 @@
 #    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/05/18 15:22:21 by kcatrix          ###   ########.fr        #
+#    Updated: 2022/05/20 13:54:48 by kcatrix          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ OBJECTS	= ./bin
  
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
-SRCS = main.c
+SRCS = main.c ft_cmd.c
 
 RM = rm -f
 
 ifndef BONUS
-SOURCES	= ./srcs
-OBJS	= $(SRCS:.c=.o)
+SOURCES	= ./srcs/
+OBJS	= $(addprefix $(SOURCES),$(SRCS:.c=.o))
 else
 SOURCES	= ./srcs_bonus
 OBJS	= $(SRCS_BONUS:.c=.o)

@@ -1,6 +1,6 @@
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-void ft_ajout(char **path2)
+/*void ft_ajout(char **path2)
 {
 	int i;
 
@@ -23,15 +23,19 @@ int ft_verifaccess(char **str, char **argv, char **env)
 
 	str2 = malloc(sizeof(char*) * 5 + 1);
 	i = 0;
-
+	
+	while (argv[i])
+	{
+		printf("argv = %s\n", argv[i++]);
+	}
 	//verifier les options sur les argv apres le 0, si argv[x][0] != "-" on arrete d alimenter diviser en 2
 	//la ligne, compter le nombre d arg y dans la deuxieme partie et boucler y fois la fonction sur ce dernier avec la cmd
-	ft_divfunct();
+	//ft_divfunct();
 	while(str[i])
 	{
-		ft_strjoin(str[i], argv);
+		//ft_strjoin(str[i], argv);
 		str2[i] = ft_strjoin(str[i], argv[0]);
-		str2[i] = ft_strjoin(str2[i], "/");
+		str2[i] = ft_strjoin(str2[i], "/");
 		i++;
 	}
 	i = 0;
@@ -43,17 +47,18 @@ int ft_verifaccess(char **str, char **argv, char **env)
 		i++;
 	}
 	return(-1);
-}
+}*/
 
 int main(int ac, char** av, char **env)
 {
 	ac = 0;
 	av = NULL;
 	char *line;
-	int i = 0;
+	/*int i = 0;
 	char *path; 
 	char **path2;
 	char **argv;
+	
 
 	while(env[i])
 	{
@@ -73,11 +78,14 @@ int main(int ac, char** av, char **env)
 	{
 		printf("Path2 = %s\n", path2[i]);
 		i++;
-	}
+	}*/
 	while(1)
 	{
 		line = readline("minishell >");
-		argv = ft_split(line,' ');
+		ft_cmd(line, env);
+	}
+}
+	/*	argv = ft_split(line,' ');
 		printf("1\n");
 		if (ft_verifaccess(path2, argv, env) == 0)
 		{
@@ -105,7 +113,7 @@ int main(int ac, char** av, char **env)
 	return(0);
 }
 
-/*int checkcmd()
+int checkcmd()
 {
 	if (ACCESS(line) == 
 
