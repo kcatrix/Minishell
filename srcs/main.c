@@ -9,6 +9,7 @@ int main(int ac, char** av, char **env)
 	while(1)
 	{
 		line = readline("minishell >");
+		add_history(line);
 		ft_cmd(line, env);
 	}
 }
