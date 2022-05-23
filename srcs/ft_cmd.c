@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cmd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
+/*   Updated: 2022/05/23 12:09:18 by tnicoue          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int ft_cmd(char *line, char **env)
@@ -7,6 +19,8 @@ int ft_cmd(char *line, char **env)
 	int i;
 
 	i = 0;
+	if (line[0] == 0)
+		return(0);
 	path = path_fct(env);
 	spli = ft_split(line, ' ');
 	i = verif_exist(path, spli[0]);
@@ -60,11 +74,11 @@ char    **path_finish(char **env)
 
 int verif_exist(char **path, char *argv)
 {
-    int i;
-    int x;
+    int		i;
+    int		x;
 
-    i = -1;
-    x = 1;
+	i = -1;
+	x = 1;
     while (path[++i])
     {
         path[i] = ft_strjoin(path[i], argv);
