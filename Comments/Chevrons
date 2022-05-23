@@ -1,0 +1,8 @@
+>> creer le fichier s il n existe pas et rajoute a la suite la commande effectuee
+
+> creer le fichier s il n existe pas et remplace le contenu par le resultat de la commande
+
+<< Prends toutes les donnees en entrees, pour la commnande, ayant pour derniere entree
+ce qui est ecrit a droite des chevrons
+
+< prends le fichier a droite des chevrons comme entree pour la commande a gauche
