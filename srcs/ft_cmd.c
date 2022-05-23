@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/05/23 12:09:18 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/05/23 13:35:34 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int ft_cmd(char *line, char **env)
 		printf("%s: Command not found\n", line);
 		return(-1);
 	}
-	spli = verif_option(spli);
+	//spli = verif_option(spli);
 	execve(path[i], spli, env);
 	return (0);
 }
@@ -89,7 +89,7 @@ int verif_exist(char **path, char *argv)
     return (-1);
 }
 
-char **verif_option(char **spli)
+/*char **verif_option(char **spli)
 {
 	char **result;
 	int i;
@@ -113,4 +113,4 @@ char **verif_option(char **spli)
 		i++;
 	}
 	return (result);
-}
+}*/
