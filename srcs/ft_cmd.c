@@ -3,20 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msebbane <msebbane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/05/24 15:22:02 by msebbane         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:57:12 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 /*
+
+pipe gerer les quotes correctement, gerer les pipes chelous
+
+env affiche pas les variables vides et export oui
+ 
 EXPORT ; La commande export marque une variable d'environnement à exporter 
 avec tout processus enfant nouvellement créé et permet ainsi à un processus 
 enfant d'hériter de toutes les variables marquées.
 */
-char	*ft_suppr(char *tmp, char *spli)
+/*char	**ft_verifparam(char *env, t_stock *env2)
+{
+	int	i;
+
+	i = 0;
+	while(env[i])
+	{
+		
+	}
+}*/
+/*char	*ft_suppr(char *tmp, char *spli)
 {
 	int	i;
 
@@ -28,9 +44,33 @@ char	*ft_suppr(char *tmp, char *spli)
 	tmp[i] = '\0';
 	printf("tmp == %s\n", tmp);
 	return (tmp);
+}*/
+
+char **ft_cp_env(char **env)
+{
+	int	i;
+	char **tmp;
+
+	i = 0;
+	while(env[i])
+		i++;
+	stock.paramenv = malloc(sizeof(char *) * i + 1);
+	tmp = malloc(sizeof(char *) * i + 1);
+	i = 0;
+	while(env[i])
+	{
+		tmp[i] = malloc(sizeof(char) * ft_strlen(env[i] + 1));
+		f
+		stock.paramenv[i] = 
+		tmp[i] = env[i];
+		i++;
+	}
+	return (tmp);
 }
 
-int	cmd_unset(char **spli, char **env)
+// securitee a rajouter pour verifier l existence du parametre au sein de l env
+// stocker les differents parametre dans un tableau
+char **cmd_unset(char **spli, char **env)
 {
 	int		i;
 	char	**tmp;
@@ -39,22 +79,32 @@ int	cmd_unset(char **spli, char **env)
 	i = 0;
 	while (tmp[i])
 	{
-		printf("oeoeoe mari\n");
-		if (ft_memcmp(env[i], spli[1], ft_strlen(spli[1])) == 0)
+		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0)
 		{
-			tmp[i] = ft_suppr(tmp[i], spli[1]);
-			printf("tmp[i] = %s, env[i] = %s \n", tmp[i], env[i]);
+			while(tmp[i])
+			{
+				tmp[i] = tmp[i + 1];
+				i++;
+			}
 		}
 		i++;
 	}
-	return (0);
+	return (tmp);
 }
 
 int	ft_redirect(char **spli, char **env)
 {
+	int	i;
+
+	i = 0;
 	if (ft_strncmp(spli[0], "unset", 5) == 0)
 	{
-		cmd_unset(spli, env);
+		env = cmd_unset(spli, env);
+		while(env[i])
+		{
+			printf("%s\n", env[i]);
+			i++;
+		}
 		return (0);
 	}
 	return (1);

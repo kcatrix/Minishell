@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msebbane <msebbane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/05/24 14:08:07 by msebbane         ###   ########.fr       */
+/*   Updated: 2022/05/31 13:20:20 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	supp_env(char **env)
 	return (0);
 }
 
+
 int	main(int ac, char **av, char **env)
 {
 	char	*line;
@@ -40,14 +41,18 @@ int	main(int ac, char **av, char **env)
 	ac = 0;
 	av = NULL;
 	id = 0;
+
+	stock.test = 0;
 	while (1)
 	{
 		line = readline("minishell >");
 		add_history(line);
 		if (ft_strncmp(line, "exit", 4) == 0)
 			exit(0);
+		printf("oui\n");
 		if (supp_env(env) == 1)
 			return (0);
+		printf("oui\n");
 		id = fork();
 		if (id == 0)
 			return (ft_cmd(line, env));
