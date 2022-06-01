@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/01 13:00:25 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/01 17:28:16 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char **ft_cp_env(char **env)
 	i = 0;
 	while(env[i])
 		i++;
-	stock.paramenv = malloc(sizeof(char *) * i + 1);
 	tmp = malloc(sizeof(char *) * i + 1);
 	i = 0;
 	while(env[i])
@@ -77,7 +76,8 @@ char **cmd_unset(char **spli, char **env)
 	i = 0;
 	while (tmp[i])
 	{
-		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0)
+		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0
+			&& (tmp[i][ft_strlen(spli[1])] == '='))
 		{
 			while(tmp[i])
 			{
@@ -97,10 +97,10 @@ int	ft_redirect(char **spli, char **env)
 	i = 0;
 	if (ft_strncmp(spli[0], "unset", 5) == 0)
 	{
-		env = cmd_unset(spli, env);
-		while(env[i])
+		stock.cpenv = cmd_unset(spli, env);
+		while(stock.cpenv[i])
 		{
-			printf("%s\n", env[i]);
+			printf("%s\n", stock.cpenv[i]);
 			i++;
 		}
 		return (0);
@@ -108,6 +108,11 @@ int	ft_redirect(char **spli, char **env)
 	if (ft_strncmp(spli[0], "echo", 4) == 0)
 	{
 		cmd_echo(spli);
+		return(0);
+	}
+	if (ft_strncmp(spli[0], "cd", 2) == 0)
+	{
+		cmd_cd(spli, env);
 		return(0);
 	}
 	return (1);

@@ -16,11 +16,14 @@ int     verif_exist(char **path, char *argv);
 char    **verif_option(char **spli);
 void    ft_exit(int x);
 void	cmd_echo(char **spli);
+void	cmd_cd(char **spli, char **env);
 int 	echo_option(char *spli);
+char	**ft_cp_env(char **env);
+char	**cmd_cd_dot(char **spli);
 
 typedef struct s_stock
 {
-    char    **paramenv;
+   	char    **cpenv;
     char    **derive;
     int     test;
 }   t_stock;

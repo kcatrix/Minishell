@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/01 12:56:58 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/01 17:26:19 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ int	main(int ac, char **av, char **env)
 	stock.test = 0;
 	while (1)
 	{
+		if (stock.cpenv != NULL)
+		{
+			printf("copie sale\n");
+			env = stock.cpenv;
+		}
 		line = readline("minishell >");
 		add_history(line);
 		if (ft_strncmp(line, "exit", 4) == 0)
