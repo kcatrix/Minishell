@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/05/31 13:57:12 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/06/01 13:00:25 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ char **ft_cp_env(char **env)
 	while(env[i])
 	{
 		tmp[i] = malloc(sizeof(char) * ft_strlen(env[i] + 1));
-		f
-		stock.paramenv[i] = 
 		tmp[i] = env[i];
 		i++;
 	}
@@ -106,6 +104,11 @@ int	ft_redirect(char **spli, char **env)
 			i++;
 		}
 		return (0);
+	}
+	if (ft_strncmp(spli[0], "echo", 4) == 0)
+	{
+		cmd_echo(spli);
+		return(0);
 	}
 	return (1);
 }

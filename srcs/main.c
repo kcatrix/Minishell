@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/05/31 13:20:20 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/06/01 12:56:58 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ int	main(int ac, char **av, char **env)
 		add_history(line);
 		if (ft_strncmp(line, "exit", 4) == 0)
 			exit(0);
-		printf("oui\n");
 		if (supp_env(env) == 1)
 			return (0);
-		printf("oui\n");
 		id = fork();
 		if (id == 0)
 			return (ft_cmd(line, env));

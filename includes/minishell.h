@@ -15,6 +15,8 @@ char    **path_finish(char **env);
 int     verif_exist(char **path, char *argv);
 char    **verif_option(char **spli);
 void    ft_exit(int x);
+void	cmd_echo(char **spli);
+int 	echo_option(char *spli);
 
 typedef struct s_stock
 {

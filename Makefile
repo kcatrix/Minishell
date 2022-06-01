@@ -6,7 +6,7 @@
 #    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/05/23 15:07:45 by kcatrix          ###   ########.fr        #
+#    Updated: 2022/06/01 12:49:45 by kevyn            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJECTS	= ./bin
  
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
-SRCS = main.c ft_cmd.c
+SRCS = main.c ft_cmd.c ft_cd_and_echo.c
 
 RM = rm -f
 
