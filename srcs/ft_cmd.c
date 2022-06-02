@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/01 17:28:16 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/02 12:07:56 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	ft_cmd(char *line, char **env)
 	char	**path;
 	char	**spli;
 	int		i;
+	int		id;
 
 	i = 0;
 	if (line[0] == 0)
@@ -132,14 +133,22 @@ int	ft_cmd(char *line, char **env)
 	spli = ft_split(line, ' ');
 	if (ft_redirect(spli, env) == 0)
 		return (0);
+	if (path == NULL)
+	{
+		printf("%s: No such file or directory\n", spli[0]);
+		return(0);
+	}
 	i = verif_exist(path, spli[0]);
-	if (i == -1)
+	if (i == -1 || !path)
 	{
 		printf("%s: Command not found\n", line);
 		return (-1);
 	}
-	//spli = verif_option(spli);
-	execve(path[i], spli, env);
+	id = fork();
+	if (id == 0)
+		execve(path[i], spli, env);
+	else
+		waitpid(id, 0, 0);
 	return (0);
 }
 
@@ -158,6 +167,9 @@ char	**path_fct(char **env)
 			break ;
 		i++;
 	}
+	if (env[i] == NULL)
+		return(NULL);
+
 	while (env[i][y] != '=')
 		y++;
 	str = env[i] + y + 1;
