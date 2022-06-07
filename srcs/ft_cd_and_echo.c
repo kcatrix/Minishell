@@ -44,12 +44,12 @@ int	echo_option(char *spli)
 void	cmd_cd(char **spli, char **env)
 {
 	stock.cpenv = ft_cp_env(env);
-	if (strcmp(spli[1], ".") == 0)
+	if (!spli[1])
+        cmd_cd_noarg();
+	else if (strcmp(spli[1], ".") == 0)
 		cmd_cd_dot();
 	else if (strcmp(spli[1], "..") == 0)
-        cmd_cd_dot_dot();
-    //else if (!spli[1])
-    //    cmd_cd_noarg();
+        cmd_cd_dot_dot(); 
     else
         cmd_cd_absolute_redirect(spli[1]);
 
@@ -141,15 +141,9 @@ char    *ft_chk_last_path(char *pwd)
 void    cmd_cd_absolute_redirect(char *spli)
 {
     if(spli[0] == '/')
-    {
-        printf("absolute\n");
         cmd_cd_absolute(spli);
-    }
     else
-    {
-        printf("relative\n");
         cmd_cd_relative(spli);
-    }
 }
 
 void    cmd_cd_absolute(char *spli)
@@ -201,7 +195,6 @@ void    cmd_cd_relative_pwd(char *spli)
     int i;
 
     i = 0;
-    printf("le chemin est le suivant : %s\n", stock.cpenv[i]);
     while(stock.cpenv[i])
     {
         if (ft_memcmp(stock.cpenv[i], "OLDPWD=", 7) == 0)
@@ -237,4 +230,46 @@ int verifpwd(char *spli)
         return(0);
     else
         return(1);
+}
+
+void	cmd_cd_noarg(void)
+{
+	int i;
+
+	i = 0;
+	while(stock.cpenv[i])
+	{
+        if (ft_memcmp(stock.cpenv[i], "HOME=", 5) == 0)
+		{
+			chdir(stock.cpenv[i] + 5);
+			cmd_cd_pwd(stock.cpenv[i] + 5);
+		}
+        i++;
+	}
+}
+
+void    cmd_cd_pwd(char *home)
+{
+    int i;
+
+    i = 0;
+    while(stock.cpenv[i])
+    {
+        if (ft_memcmp(stock.cpenv[i], "OLDPWD=", 7) == 0)
+        {
+            stock.cpenv[i] = "OLDPWD=";
+            stock.cpenv[i] = ft_strjoin(stock.cpenv[i], getpwd());
+        }
+        i++;
+    }
+    i = 0;
+    while(stock.cpenv[i])
+    {
+        if (ft_memcmp(stock.cpenv[i], "PWD=", 4) == 0)
+        {
+			stock.cpenv[i] = "PWD=";
+            stock.cpenv[i] = ft_strjoin(stock.cpenv[i], home);
+        }
+        i++;
+    }
 }

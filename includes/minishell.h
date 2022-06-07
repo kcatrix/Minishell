@@ -23,13 +23,16 @@ char	**ft_cp_env(char **env);
 char	**cmd_cd_dot(void);
 char    *ft_chk_last_path(char *pwd);
 void    cmd_cd_dot_dot(void);
-
 void    cmd_cd_relative_pwd(char *spli);
 int     verifpwd(char *spli);
 void    cmd_cd_absolute_pwd(char *spli);
 void    cmd_cd_relative(char *spli);
 void    cmd_cd_absolute(char *spli);
 void    cmd_cd_absolute_redirect(char *spli);
+void    cmd_cd_pwd(char *home);
+void    cmd_cd_noarg(void);
+char    **parse(char **spli);
+char	*cmd_dollar(char *str);
 
 typedef struct s_stock
 {

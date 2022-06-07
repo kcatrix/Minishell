@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/02 12:07:56 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/06/07 13:04:16 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int	ft_cmd(char *line, char **env)
 		return (0);
 	path = path_fct(env);
 	spli = ft_split(line, ' ');
+	stock.cpenv = env;
+	spli = parse(spli);
 	if (ft_redirect(spli, env) == 0)
 		return (0);
 	if (path == NULL)
