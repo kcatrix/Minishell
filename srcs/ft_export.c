@@ -45,18 +45,27 @@ void	ft_export_noarg(void)
 
 char *ft_preline(char *line)
 {
-	int	i;
+	char	*line2;
+	int		i;
 
 	i = 0;
+	line2 = malloc(sizeof(char) * ft_strlen(line) + 1);
 	while (line[i])
 	{
-		if (line[i] == '=')
+		line2[i] = line[i];
+		i++;
+	}
+	line2[i] = '\0';
+	i = 0;
+	while (line2[i])
+	{
+		if (line2[i] == '=')
 		{
-			line[i] = '\0';
+			line2[i] = '\0';
 		}
 		i++;
 	}
-	return (line);
+	return (line2);
 }
 
 int	veriflen(char **spli, int i)
@@ -75,7 +84,7 @@ int	ft_parseexport(char *spli)
 
 	line = ft_preline(spli);
 	i = 0;
-	while (spli[i])
+	while (line[i])
 	{
 		if (ft_isalpha(line[i]) != 1)
 		{
@@ -107,16 +116,27 @@ void	ft_export(char **spli)
 			if (ft_strcmp(ft_preline(spli[1]), ft_preline(stock.cpenv[i])) < 0)
 			{
 				lineenv = stock.cpenv[i];
-				stock.cpenv[i] = spli[i];
-				while (stock.cpenv[++i])
+				stock.cpenv[i] = spli[1];
+				printf("stockcpenv[i] = %s\n", stock.cpenv[i]);
+				i++;
+				while (stock.cpenv[i])
 				{
 					lineenv2 = stock.cpenv[i];
 					stock.cpenv[i] = lineenv;
-					if (stock.cpenv[i + 1])
-						lineenv = stock.cpenv[i + 1];
+					lineenv = lineenv2;
+					i++;
 				}
+				return ;
 			}
 			i++;
+			// A = actuel B = Rien stockenv = New;
+			// B = Stockenv Stockenv = A  A = B
+			// 
+		}	
+		if (ft_strcmp(ft_preline(spli[1]), ft_preline(stock.cpenv[i - 1])) > 0)
+		{
+			stock.cpenv[i] = spli[1];
+			stock.cpenv[i + 1] = NULL;
 		}
 	}
 }

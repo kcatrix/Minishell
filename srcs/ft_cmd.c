@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/08 11:57:02 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/08 18:12:26 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,32 +95,32 @@ int	ft_redirect(char **spli, char **env)
 	int	i;
 
 	i = 0;
-	if (ft_strncmp(spli[0], "unset", 5) == 0)
+	if (ft_strcmp(spli[0], "unset") == 0)
 	{
 		stock.cpenv = cmd_unset(spli, env);
 		return (0);
 	}
-	else if (ft_strncmp(spli[0], "echo", 4) == 0)
+	else if (ft_strcmp(spli[0], "echo") == 0)
 	{
 		cmd_echo(spli);
 		return(0);
 	}
-	else if (ft_strncmp(spli[0], "cd", 2) == 0)
+	else if (ft_strcmp(spli[0], "cd") == 0)
 	{
 		cmd_cd(spli, env);
 		return(0);
 	}
-	else if (ft_strncmp(spli[0], "PWD", 3) == 0 || ft_strncmp(spli[0], "pwd", 3) == 0)
+	else if (ft_strcmp(spli[0], "PWD") == 0 || ft_strcmp(spli[0], "pwd") == 0)
 	{
 		ft_pwd();
 		return(0);
 	}
-	else if (ft_strncmp(spli[0], "env", 3) == 0 || ft_strncmp(spli[0], "ENV", 3) == 0)
+	else if (ft_strcmp(spli[0], "env") == 0 || ft_strcmp(spli[0], "ENV") == 0)
 	{
 		ft_env();
 		return(0);
 	}
-	else if (ft_strncmp(spli[0], "export", 6) == 0)
+	else if (ft_strcmp(spli[0], "export") == 0)
 	{
 		ft_export(spli);
 		return(0);
