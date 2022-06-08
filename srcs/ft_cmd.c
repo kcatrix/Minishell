@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/07 13:04:16 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/08 11:57:02 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,31 @@ int	ft_redirect(char **spli, char **env)
 	if (ft_strncmp(spli[0], "unset", 5) == 0)
 	{
 		stock.cpenv = cmd_unset(spli, env);
-		while(stock.cpenv[i])
-		{
-			printf("%s\n", stock.cpenv[i]);
-			i++;
-		}
 		return (0);
 	}
-	if (ft_strncmp(spli[0], "echo", 4) == 0)
+	else if (ft_strncmp(spli[0], "echo", 4) == 0)
 	{
 		cmd_echo(spli);
 		return(0);
 	}
-	if (ft_strncmp(spli[0], "cd", 2) == 0)
+	else if (ft_strncmp(spli[0], "cd", 2) == 0)
 	{
 		cmd_cd(spli, env);
+		return(0);
+	}
+	else if (ft_strncmp(spli[0], "PWD", 3) == 0 || ft_strncmp(spli[0], "pwd", 3) == 0)
+	{
+		ft_pwd();
+		return(0);
+	}
+	else if (ft_strncmp(spli[0], "env", 3) == 0 || ft_strncmp(spli[0], "ENV", 3) == 0)
+	{
+		ft_env();
+		return(0);
+	}
+	else if (ft_strncmp(spli[0], "export", 6) == 0)
+	{
+		ft_export(spli);
 		return(0);
 	}
 	return (1);
