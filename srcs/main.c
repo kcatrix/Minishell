@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/09 12:17:38 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/10 14:27:42 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ int	main(int ac, char **av, char **env)
 	id = 0;
 
 	stock.test = 0;
+	stock.cpenv = ft_cp_env(env);
 	while (1)
 	{
-		if (stock.cpenv != NULL)
-			env = stock.cpenv;
 		line = readline("minishell >");
 		add_history(line);
 		if (ft_strncmp(line, "exit", 4) == 0)

@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/10 12:30:54 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/10 14:59:20 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,24 @@ void	free_spli(char **spli)
 char **ft_cp_env(char **env)
 {
 	int	i;
+	int	j;
 	char **tmp;
 
 	i = 0;
 	while(env[i])
 		i++;
-	tmp = malloc(sizeof(char *) * i + 1);
+	tmp = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while(env[i])
 	{
-		tmp[i] = malloc(sizeof(char) * ft_strlen(env[i] + 1));
-		tmp[i] = env[i];
+		tmp[i] = malloc(sizeof(char) * ft_strlen(env[i]) + 1);
+		j = 0;
+		while(env[i][j])
+		{
+			tmp[i][j] = env[i][j];
+			j++;
+		}
+		tmp[i][j] = '\0';
 		i++;
 	}
 	return (tmp);
@@ -159,8 +166,6 @@ int	ft_cmd(char *line, char **env)
 	//split use
 	spli = ft_split(line, ' ');
 	//split
-	
-	stock.cpenv = ft_cp_env(env);
 	spli = parse(spli);
 	if (ft_redirect(spli, env) == 0)
 	{

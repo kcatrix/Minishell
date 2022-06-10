@@ -1,32 +1,34 @@
 #include "../includes/minishell.h"
 
 
-char	*ft_exportaff(char *line, char *newline)
+char	**ft_exportaff(char *line, char **newline)
 {
 	int	i;
 	
 	i = 0;
 	while (line[i])
 	{
-		newline[i] = line[i];
+		newline[0][i] = line[i];
 		if (line[i] == '=')
 		{
 			i++;
-			newline[i] = '"';
+			newline[0][i] = '"';
 			i++;
 			while (line[i])
 			{
-				newline[i] = line[i - 1];
+				newline[0][i] = line[i - 1];
 				i++;
 			}
-			newline[i] = line[i - 1];
-			newline[++i] = '"';
-			newline[++i] = '\0';
+			newline[0][i] = line[i - 1];
+			newline[0][++i] = '"';
+			newline[0][++i] = '\0';
+			return (newline);
 		}
 		i++;
 	}
 	return (newline);
 }
+
 void	ft_export_noarg(void)
 {
 	int	i;
@@ -36,11 +38,12 @@ void	ft_export_noarg(void)
 	while (stock.cpenv[i])
 	{
 		line = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 3);
-		line = ft_exportaff(stock.cpenv[i], line);
+		line = *ft_exportaff(stock.cpenv[i], &line);
 		printf("declare -x %s\n", line);
+		//free(line);
+		printf("okgoogle\n");
 		i++;
 	}
-	free(line);
 }
 
 char *ft_preline(char *line)
@@ -122,10 +125,11 @@ char	**ft_mallocexportadd(void)
 	i = 0;
 	while(stock.cpenv[i])
 		i++;
-	cpcpenv = malloc(sizeof(char *) * i + 1);
+	cpcpenv = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while(stock.cpenv[i])
 	{
+		//CHANGER LES MALLOC FAST
 		cpcpenv[i] = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 1);
 		cpcpenv[i] = stock.cpenv[i];
 		printf("fdpdemalloc\n");
@@ -137,7 +141,7 @@ char	**ft_mallocexportadd(void)
 	printf("no\n");
 	free(stock.cpenv);
 	printf("no\n");
-	stock.cpenv = malloc(sizeof(char *) * i + 2);
+	stock.cpenv = malloc(sizeof(char *) * (i + 2));
 	return (cpcpenv);
 }
 
@@ -154,7 +158,9 @@ void	ft_triexport(void)
 void	ft_exportadd(int i, char *spli)
 {
 	char 	**cpcpenv;
+	int		y;
 
+	y = 0;
 	cpcpenv = ft_mallocexportadd();
 	while (cpcpenv[i])
 		{
@@ -163,18 +169,19 @@ void	ft_exportadd(int i, char *spli)
 			{
 				stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(spli) + 1);
 				stock.cpenv[i] = spli;
-				printf("Spli = %s\n", spli);
-				printf("stock.cpenv[i] = %s\n", stock.cpenv[i]);
+				y = i;
 				i++;
-				while (cpcpenv[i - 1])
+				while (cpcpenv[y])
 				{
-					stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[i - 1]) + 1);
-					stock.cpenv[i] = cpcpenv[i - 1];
+					stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[y]) + 1);
+					stock.cpenv[i] = cpcpenv[y];
 					printf("cpcpenv[i] = %s\n", stock.cpenv[i]);
 					//free(cpcpenv[i - 1]);
+					//CHANGER LES MALLOCS FAST
+					y++;
 					i++;
 				}
-				printf("cpcpenv[i - 2] = %s\n", cpcpenv[i - 2]);
+				printf("cpcpenv[i - 2] = %s\n", cpcpenv[y - 1]);
 				return ;
 			}
 			stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[i]) + 1);
