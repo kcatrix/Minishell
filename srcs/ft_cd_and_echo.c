@@ -15,6 +15,7 @@ void	cmd_echo(char **spli)
 	}
 	if(echo_option(spli[1]) == 1)
 		printf("\n");
+	free_spli(spli);
 }
 
 int	echo_option(char *spli)
@@ -52,7 +53,7 @@ void	cmd_cd(char **spli, char **env)
         cmd_cd_dot_dot(); 
     else
         cmd_cd_absolute_redirect(spli[1]);
-
+	free_spli(spli);
 }
 
 char **cmd_cd_dot(void)
@@ -176,6 +177,7 @@ void    cmd_cd_absolute_pwd(char *spli)
     {
         if (ft_memcmp(stock.cpenv[i], "OLDPWD=", 7) == 0)
         {
+			free(stock.cpenv[i]);
             stock.cpenv[i] = "OLDPWD=";
             stock.cpenv[i] = ft_strjoin(stock.cpenv[i], getpwd());
         }
@@ -199,6 +201,7 @@ void    cmd_cd_relative_pwd(char *spli)
     {
         if (ft_memcmp(stock.cpenv[i], "OLDPWD=", 7) == 0)
         {
+			free(stock.cpenv[i]);
             stock.cpenv[i] = "OLDPWD=";
             stock.cpenv[i] = ft_strjoin(stock.cpenv[i], getpwd());
         }
@@ -257,6 +260,7 @@ void    cmd_cd_pwd(char *home)
     {
         if (ft_memcmp(stock.cpenv[i], "OLDPWD=", 7) == 0)
         {
+			free(stock.cpenv[i]);
             stock.cpenv[i] = "OLDPWD=";
             stock.cpenv[i] = ft_strjoin(stock.cpenv[i], getpwd());
         }
@@ -267,6 +271,7 @@ void    cmd_cd_pwd(char *home)
     {
         if (ft_memcmp(stock.cpenv[i], "PWD=", 4) == 0)
         {
+			free(stock.cpenv[i]);
 			stock.cpenv[i] = "PWD=";
             stock.cpenv[i] = ft_strjoin(stock.cpenv[i], home);
         }

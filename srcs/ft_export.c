@@ -1,12 +1,10 @@
 #include "../includes/minishell.h"
 
 
-char	*ft_exportaff(char *line)
+char	*ft_exportaff(char *line, char *newline)
 {
-	char *newline;
 	int	i;
 	
-	newline = malloc(sizeof(char) * ft_strlen(line) + 3);
 	i = 0;
 	while (line[i])
 	{
@@ -37,10 +35,12 @@ void	ft_export_noarg(void)
 	i = 0;
 	while (stock.cpenv[i])
 	{
-		line = ft_exportaff(stock.cpenv[i]);
+		line = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 3);
+		line = ft_exportaff(stock.cpenv[i], line);
 		printf("declare -x %s\n", line);
 		i++;
 	}
+	free(line);
 }
 
 char *ft_preline(char *line)
@@ -97,46 +97,115 @@ int	ft_parseexport(char *spli)
 }
 
 
+int	ft_verifenv(char *spli)
+{
+	int	i;
+
+	i = 0;
+	while(stock.cpenv[i])
+	{
+		if (ft_strcmp(ft_preline(spli), ft_preline(stock.cpenv[i])) == 0)
+		{
+			stock.cpenv[i] = spli;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+char	**ft_mallocexportadd(void)
+{
+	int		i;
+	char	**cpcpenv;
+
+	i = 0;
+	while(stock.cpenv[i])
+		i++;
+	cpcpenv = malloc(sizeof(char *) * i + 1);
+	i = 0;
+	while(stock.cpenv[i])
+	{
+		cpcpenv[i] = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 1);
+		cpcpenv[i] = stock.cpenv[i];
+		printf("fdpdemalloc\n");
+		//free(stock.cpenv[i]);
+		printf("fdpdemalloc2\n");
+		i++;
+	}
+	cpcpenv[i] = "\0";
+	printf("no\n");
+	free(stock.cpenv);
+	printf("no\n");
+	stock.cpenv = malloc(sizeof(char *) * i + 2);
+	return (cpcpenv);
+}
+
+/*void	ft_veriftri(
+
+void	ft_triexport(void)
+{
+	int	i;
+
+	i = 0;
+	while(
+}*/
+
+void	ft_exportadd(int i, char *spli)
+{
+	char 	**cpcpenv;
+
+	cpcpenv = ft_mallocexportadd();
+	while (cpcpenv[i])
+		{
+			printf("no2\n");
+			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpenv[i])) < 0)
+			{
+				stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(spli) + 1);
+				stock.cpenv[i] = spli;
+				printf("Spli = %s\n", spli);
+				printf("stock.cpenv[i] = %s\n", stock.cpenv[i]);
+				i++;
+				while (cpcpenv[i - 1])
+				{
+					stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[i - 1]) + 1);
+					stock.cpenv[i] = cpcpenv[i - 1];
+					printf("cpcpenv[i] = %s\n", stock.cpenv[i]);
+					//free(cpcpenv[i - 1]);
+					i++;
+				}
+				printf("cpcpenv[i - 2] = %s\n", cpcpenv[i - 2]);
+				return ;
+			}
+			stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[i]) + 1);
+			stock.cpenv[i] = cpcpenv[i];
+			//free(cpcpenv[i]);
+			i++;
+		}
+		if (ft_strcmp(ft_preline(spli), ft_preline(stock.cpenv[i - 1])) > 0)
+		{
+			printf("Spli = %s\n", spli);
+			stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(spli) + 1);
+			stock.cpenv[i] = spli;
+			stock.cpenv[i + 1] = NULL;
+		}
+		free(cpcpenv);
+		printf("no\n");
+}
+
 void	ft_export(char **spli)
 {
 	int	i;
-	char	*lineenv;
-	char	*lineenv2;
 
 	i = 0;
-	
 	if (!spli[1])
 		ft_export_noarg();
 	else
 	{
 		if (ft_parseexport(spli[1]) == 1)
 			return;
-		while (stock.cpenv[i])
-		{
-			if (ft_strcmp(ft_preline(spli[1]), ft_preline(stock.cpenv[i])) < 0)
-			{
-				lineenv = stock.cpenv[i];
-				stock.cpenv[i] = spli[1];
-				printf("stockcpenv[i] = %s\n", stock.cpenv[i]);
-				i++;
-				while (stock.cpenv[i])
-				{
-					lineenv2 = stock.cpenv[i];
-					stock.cpenv[i] = lineenv;
-					lineenv = lineenv2;
-					i++;
-				}
-				return ;
-			}
-			i++;
-			// A = actuel B = Rien stockenv = New;
-			// B = Stockenv Stockenv = A  A = B
-			// 
-		}	
-		if (ft_strcmp(ft_preline(spli[1]), ft_preline(stock.cpenv[i - 1])) > 0)
-		{
-			stock.cpenv[i] = spli[1];
-			stock.cpenv[i + 1] = NULL;
-		}
+		else if (ft_verifenv(spli[1]) == 1)
+			return;
+		ft_exportadd(i, spli[1]);
 	}
 }

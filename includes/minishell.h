@@ -36,6 +36,7 @@ char	*cmd_dollar(char *str);
 void	ft_export(char **spli);
 void	ft_pwd(void);
 void	ft_env(void);
+void    free_spli(char **spli);
 
 typedef struct s_stock
 {

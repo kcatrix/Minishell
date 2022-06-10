@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/08 18:12:26 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/10 12:30:54 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ enfant d'hériter de toutes les variables marquées.
 	printf("tmp == %s\n", tmp);
 	return (tmp);
 }*/
+
+void	free_spli(char **spli)
+{
+	int i;
+
+	i = 0;
+	while (spli[i])
+	{
+		free(spli[i]);
+		i++;
+	}
+}
 
 char **ft_cp_env(char **env)
 {
@@ -98,6 +110,7 @@ int	ft_redirect(char **spli, char **env)
 	if (ft_strcmp(spli[0], "unset") == 0)
 	{
 		stock.cpenv = cmd_unset(spli, env);
+		free_spli(spli);
 		return (0);
 	}
 	else if (ft_strcmp(spli[0], "echo") == 0)
@@ -113,16 +126,19 @@ int	ft_redirect(char **spli, char **env)
 	else if (ft_strcmp(spli[0], "PWD") == 0 || ft_strcmp(spli[0], "pwd") == 0)
 	{
 		ft_pwd();
+		free_spli(spli);
 		return(0);
 	}
 	else if (ft_strcmp(spli[0], "env") == 0 || ft_strcmp(spli[0], "ENV") == 0)
 	{
 		ft_env();
+		free_spli(spli);
 		return(0);
 	}
 	else if (ft_strcmp(spli[0], "export") == 0)
 	{
 		ft_export(spli);
+		free_spli(spli);
 		return(0);
 	}
 	return (1);
@@ -140,11 +156,17 @@ int	ft_cmd(char *line, char **env)
 	if (line[0] == 0)
 		return (0);
 	path = path_fct(env);
+	//split use
 	spli = ft_split(line, ' ');
-	stock.cpenv = env;
+	//split
+	
+	stock.cpenv = ft_cp_env(env);
 	spli = parse(spli);
 	if (ft_redirect(spli, env) == 0)
+	{
+		free_spli(path);
 		return (0);
+	}
 	if (path == NULL)
 	{
 		printf("%s: No such file or directory\n", spli[0]);
@@ -160,7 +182,10 @@ int	ft_cmd(char *line, char **env)
 	if (id == 0)
 		execve(path[i], spli, env);
 	else
+	{
 		waitpid(id, 0, 0);
+		free_spli(path);
+	}
 	return (0);
 }
 

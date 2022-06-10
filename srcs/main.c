@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/07 11:43:56 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/09 12:17:38 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ int	main(int ac, char **av, char **env)
 			exit(0);
 		ft_cmd(line, env);
 	}
+	free(line);
 }
