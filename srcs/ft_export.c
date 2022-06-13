@@ -35,13 +35,13 @@ void	ft_export_noarg(void)
 	char *line;
 
 	i = 0;
+	//ft_veriftri();
 	while (stock.cpenv[i])
 	{
 		line = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 3);
 		line = *ft_exportaff(stock.cpenv[i], &line);
 		printf("declare -x %s\n", line);
-		//free(line);
-		printf("okgoogle\n");
+		free(line);
 		i++;
 	}
 }
@@ -120,32 +120,56 @@ int	ft_verifenv(char *spli)
 char	**ft_mallocexportadd(void)
 {
 	int		i;
+	int		y;
 	char	**cpcpenv;
 
 	i = 0;
+	y = 0;
 	while(stock.cpenv[i])
 		i++;
 	cpcpenv = malloc(sizeof(char *) * (i + 1));
 	i = 0;
 	while(stock.cpenv[i])
 	{
-		//CHANGER LES MALLOC FAST
 		cpcpenv[i] = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 1);
-		cpcpenv[i] = stock.cpenv[i];
-		printf("fdpdemalloc\n");
-		//free(stock.cpenv[i]);
-		printf("fdpdemalloc2\n");
+		while(stock.cpenv[i][y])
+		{
+			cpcpenv[i][y] = stock.cpenv[i][y];
+			y++;
+		}
+		y = 0;
+		free(stock.cpenv[i]);
 		i++;
 	}
-	cpcpenv[i] = "\0";
-	printf("no\n");
+	cpcpenv[i] = NULL;
 	free(stock.cpenv);
-	printf("no\n");
 	stock.cpenv = malloc(sizeof(char *) * (i + 2));
 	return (cpcpenv);
 }
 
-/*void	ft_veriftri(
+void	ft_veriftri(void)
+{
+	int i;
+	
+	i = 0;
+	while(stock.cpenv[i])
+	{
+		if (ft_strcmp(ft_preline(stock.cpenv[i]), ft_preline(stock.cpenv[i + 1])) > 0)
+		{
+			if (stock.cpenv[i + 2] == NULL)
+			{
+				break;
+				return(0);
+			}
+		}
+		else
+		{
+			break;
+			return(1);
+		}
+		i++;
+	}
+}
 
 void	ft_triexport(void)
 {
@@ -153,51 +177,59 @@ void	ft_triexport(void)
 
 	i = 0;
 	while(
-}*/
+}
+
+char	*ft_mallocex(char *str, char *str2)
+{
+	int	i;
+
+	i = 0;
+	
+	str2 = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while(str[i])
+	{
+		str2[i] = str[i];
+		i++;
+	}
+	str2[i] = '\0';
+	return (str2);
+}
 
 void	ft_exportadd(int i, char *spli)
 {
 	char 	**cpcpenv;
 	int		y;
+	int 	z;
 
 	y = 0;
+	z = 0;
 	cpcpenv = ft_mallocexportadd();
 	while (cpcpenv[i])
 		{
-			printf("no2\n");
 			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpenv[i])) < 0)
 			{
-				stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(spli) + 1);
-				stock.cpenv[i] = spli;
+				stock.cpenv[i] = ft_mallocex(spli, stock.cpenv[i]);
 				y = i;
 				i++;
 				while (cpcpenv[y])
 				{
-					stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[y]) + 1);
-					stock.cpenv[i] = cpcpenv[y];
-					printf("cpcpenv[i] = %s\n", stock.cpenv[i]);
-					//free(cpcpenv[i - 1]);
-					//CHANGER LES MALLOCS FAST
+					stock.cpenv[i] = ft_mallocex(cpcpenv[y], stock.cpenv[i]);
+					free(cpcpenv[y]);
 					y++;
 					i++;
 				}
-				printf("cpcpenv[i - 2] = %s\n", cpcpenv[y - 1]);
+				stock.cpenv[i] = NULL;
+				free(cpcpenv);
 				return ;
 			}
-			stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(cpcpenv[i]) + 1);
-			stock.cpenv[i] = cpcpenv[i];
-			//free(cpcpenv[i]);
+			stock.cpenv[i] = ft_mallocex(cpcpenv[i], stock.cpenv[i]);
+			free(cpcpenv[i]);
 			i++;
 		}
-		if (ft_strcmp(ft_preline(spli), ft_preline(stock.cpenv[i - 1])) > 0)
-		{
-			printf("Spli = %s\n", spli);
-			stock.cpenv[i] = malloc(sizeof(char) * ft_strlen(spli) + 1);
-			stock.cpenv[i] = spli;
-			stock.cpenv[i + 1] = NULL;
-		}
+		stock.cpenv[i] = ft_mallocex(spli, stock.cpenv[i]);
+		stock.cpenv[i + 1] = NULL;
+		free(cpcpenv[i]);
 		free(cpcpenv);
-		printf("no\n");
 }
 
 void	ft_export(char **spli)
