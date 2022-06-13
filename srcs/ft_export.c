@@ -35,11 +35,10 @@ void	ft_export_noarg(void)
 	char *line;
 
 	i = 0;
-	//ft_veriftri();
-	while (stock.cpenv[i])
+	while (stock.cpexp[i])
 	{
-		line = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 3);
-		line = *ft_exportaff(stock.cpenv[i], &line);
+		line = malloc(sizeof(char) * ft_strlen(stock.cpexp[i]) + 3);
+		line = *ft_exportaff(stock.cpexp[i], &line);
 		printf("declare -x %s\n", line);
 		free(line);
 		i++;
@@ -125,16 +124,16 @@ char	**ft_mallocexportadd(void)
 
 	i = 0;
 	y = 0;
-	while(stock.cpenv[i])
+	while(stock.cpexp[i])
 		i++;
 	cpcpenv = malloc(sizeof(char *) * (i + 1));
 	i = 0;
-	while(stock.cpenv[i])
+	while(stock.cpexp[i])
 	{
-		cpcpenv[i] = malloc(sizeof(char) * ft_strlen(stock.cpenv[i]) + 1);
-		while(stock.cpenv[i][y])
+		cpcpenv[i] = malloc(sizeof(char) * ft_strlen(stock.cpexp[i]) + 1);
+		while(stock.cpexp[i][y])
 		{
-			cpcpenv[i][y] = stock.cpenv[i][y];
+			cpcpenv[i][y] = stock.cpexp[i][y];
 			y++;
 		}
 		y = 0;
@@ -142,12 +141,12 @@ char	**ft_mallocexportadd(void)
 		i++;
 	}
 	cpcpenv[i] = NULL;
-	free(stock.cpenv);
-	stock.cpenv = malloc(sizeof(char *) * (i + 2));
+	free(stock.cpexp);
+	stock.cpexp = malloc(sizeof(char *) * (i + 2));
 	return (cpcpenv);
 }
 
-void	ft_veriftri(void)
+/*void	ft_veriftri(void)
 {
 	int i;
 	
@@ -169,15 +168,7 @@ void	ft_veriftri(void)
 		}
 		i++;
 	}
-}
-
-void	ft_triexport(void)
-{
-	int	i;
-
-	i = 0;
-	while(
-}
+}*/
 
 char	*ft_mallocex(char *str, char *str2)
 {
@@ -195,6 +186,47 @@ char	*ft_mallocex(char *str, char *str2)
 	return (str2);
 }
 
+void	ft_triexport(char *str)
+{
+	char	*save;
+	char	*save2;
+	int		i;
+
+	save = NULL;
+	save2 = NULL;
+	i = 0;
+	while (stock.cpexp[i])
+	{
+			if (ft_strcmp(ft_preline(str), ft_preline(stock.cpexp[i])) < 0)
+			{
+				save = ft_mallocex(stock.cpexp[i], save);
+				stock.cpexp[i] = ft_mallocex(str, stock.cpexp[i]);
+				i++;
+				while (stock.cpexp[i])
+				{
+					save2 = ft_mallocex(stock.cpexp[i], save2);
+					stock.cpexp[i] = ft_mallocex(save, stock.cpexp[i]);
+					free(save);
+					save = ft_mallocex(save2, save);
+					free(save2);
+					i++;
+				}
+				stock.cpexp[i] = ft_mallocex(save, stock.cpexp[i]);
+				stock.cpexp[i + 1] = NULL;
+				return ;
+			}
+			//Attention taille du stock.cpexp pas parfaitement malloc
+			i++;
+	}
+	if (!stock.cpexp[0])
+	{
+		stock.cpexp[0] = ft_mallocex(stock.cpenv[0], stock.cpexp[0]);
+		return ;
+	}
+	stock.cpexp[i] = ft_mallocex(str, stock.cpexp[i]);
+	stock.cpexp[i + 1] = NULL;
+}
+
 void	ft_exportadd(int i, char *spli)
 {
 	char 	**cpcpenv;
@@ -208,12 +240,12 @@ void	ft_exportadd(int i, char *spli)
 		{
 			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpenv[i])) < 0)
 			{
-				stock.cpenv[i] = ft_mallocex(spli, stock.cpenv[i]);
+				stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i]);
 				y = i;
 				i++;
 				while (cpcpenv[y])
 				{
-					stock.cpenv[i] = ft_mallocex(cpcpenv[y], stock.cpenv[i]);
+					stock.cpexp[i] = ft_mallocex(cpcpenv[y], stock.cpexp[i]);
 					free(cpcpenv[y]);
 					y++;
 					i++;
@@ -222,12 +254,12 @@ void	ft_exportadd(int i, char *spli)
 				free(cpcpenv);
 				return ;
 			}
-			stock.cpenv[i] = ft_mallocex(cpcpenv[i], stock.cpenv[i]);
+			stock.cpexp[i] = ft_mallocex(cpcpenv[i], stock.cpexp[i]);
 			free(cpcpenv[i]);
 			i++;
 		}
-		stock.cpenv[i] = ft_mallocex(spli, stock.cpenv[i]);
-		stock.cpenv[i + 1] = NULL;
+		stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i]);
+		stock.cpexp[i + 1] = NULL;
 		free(cpcpenv[i]);
 		free(cpcpenv);
 }
@@ -237,10 +269,24 @@ void	ft_export(char **spli)
 	int	i;
 
 	i = 0;
+	if (!stock.cpexp)
+	{
+		while(stock.cpenv[i])
+			i++;
+		stock.cpexp = malloc(sizeof(char *) * (i + 1));
+		i = 0;
+		while(stock.cpenv[i])
+		{
+			ft_triexport(stock.cpenv[i]);
+			i++;
+		}
+	}
+	i = 0;
 	if (!spli[1])
 		ft_export_noarg();
 	else
 	{
+	
 		if (ft_parseexport(spli[1]) == 1)
 			return;
 		else if (ft_verifenv(spli[1]) == 1)

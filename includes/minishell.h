@@ -41,6 +41,7 @@ void    free_spli(char **spli);
 typedef struct s_stock
 {
    	char    **cpenv;
+	char	**cpexp;
     char    **derive;
     int     test;
 }   t_stock;

@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/10 14:27:42 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/13 14:16:25 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int ac, char **av, char **env)
 	av = NULL;
 	id = 0;
 
-	stock.test = 0;
 	stock.cpenv = ft_cp_env(env);
 	while (1)
 	{
