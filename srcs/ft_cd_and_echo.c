@@ -149,7 +149,6 @@ void    cmd_cd_absolute_redirect(char *spli)
 
 void    cmd_cd_absolute(char *spli)
 {
-    if (chdir(spli) == -1)
     {
         printf("cd: %s: No such file or directory\n", spli);
         return;

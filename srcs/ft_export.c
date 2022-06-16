@@ -41,7 +41,6 @@ void	ft_export_noarg(void)
 		line = *ft_exportaff(stock.cpexp[i], &line);
 		printf("declare -x %s\n", line);
 		free(line);
-		printf("ok\n");
 		//segfault ici sans printf \n ?
 		i++;
 	}
@@ -237,45 +236,82 @@ void	ft_triexport(char *str)
 	return ;
 }
 
+int	ft_verifspli(char *spli)
+{
+	int	i;
+	int	y;
+
+	y = 0;
+	i = 0;
+	while(spli[i])
+	{
+		if (spli[i] == '=')
+		{
+			while(spli[++i])
+			{
+				if(spli[i] != 22 && spli[i] != nul)
+					y = 1;
+			}
+		}
+		if (y == 1)
+			return (0);
+	}
+	return (1);
+}
+int	ft_verifdoublon(char *spli)
+{
+	int	i;
+
+	i = 0;
+	while(stock.cpexp[i])
+	{
+		if (ft_preline(spli) == ft_preline(stock.cpexp[i] 
+			&& ft_verifspli(spli) != 0))
+		{
+			stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i])
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 void	ft_exportadd(int i, char *spli)
 {
-	char 	**cpcpenv;
+	char 	**cpcpexp;
 	int		y;
 	int 	z;
 
 	y = 0;
 	z = 0;
-	printf("Fdp\n");
-	cpcpenv = ft_mallocexportadd();
-	while (cpcpenv[i])
+	//verif doublon
+	cpcpexp = ft_mallocexportadd();
+	while (cpcpexp[i])
 		{
-			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpenv[i])) < 0)
+			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpexp[i])) < 0)
 			{
-				printf("Fdp\n");
 				stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i]);
 				y = i;
 				i++;
-				while (cpcpenv[y])
+				while (cpcpexp[y])
 				{
-					stock.cpexp[i] = ft_mallocex(cpcpenv[y], stock.cpexp[i]);
-					free(cpcpenv[y]);
+					stock.cpexp[i] = ft_mallocex(cpcpexp[y], stock.cpexp[i]);
+					free(cpcpexp[y]);
 					y++;
 					i++;
 				}
-				printf("Fdp\n");
-				stock.cpenv[i] = NULL;
-				free(cpcpenv);
+				stock.cpexp[i] = NULL;
+				free(cpcpexp);
 				return ;
 			}
-			stock.cpexp[i] = ft_mallocex(cpcpenv[i], stock.cpexp[i]);
-			free(cpcpenv[i]);
+			stock.cpexp[i] = ft_mallocex(cpcpexp[i], stock.cpexp[i]);
+			free(cpcpexp[i]);
 			i++;
 		}
-	printf("Fdp\n");
 		stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i]);
 		stock.cpexp[i + 1] = NULL;
-		free(cpcpenv[i]);
-		free(cpcpenv);
+		free(cpcpexp[i]);
+		free(cpcpexp);
 }
 
 void	ft_export(char **spli)

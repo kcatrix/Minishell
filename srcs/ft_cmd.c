@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/10 14:59:20 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/16 11:44:15 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char **cmd_unset(char **spli, char **env)
 	tmp = ft_cp_env(env);
 	i = 0;
 	while (tmp[i])
-	{
+	{//A MODIFIER, MALLOC
 		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0
 			&& (tmp[i][ft_strlen(spli[1])] == '='))
 		{
