@@ -37,6 +37,7 @@ void	ft_export(char **spli);
 void	ft_pwd(void);
 void	ft_env(void);
 void    free_spli(char **spli);
+void 	f_exit(char **spli);
 
 typedef struct s_stock
 {

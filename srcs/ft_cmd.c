@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/10 14:59:20 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/06/16 16:22:23 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,11 @@ int	ft_redirect(char **spli, char **env)
 	{
 		ft_export(spli);
 		free_spli(spli);
+		return(0);
+	}
+	else if (ft_strcmp(spli[0], "exit") == 0)
+	{
+		f_exit(spli);
 		return(0);
 	}
 	return (1);

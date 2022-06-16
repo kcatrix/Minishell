@@ -1,0 +1,1 @@
+$PATH coucou /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki' "$PATH"
