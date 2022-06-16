@@ -6,7 +6,8 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/16 16:22:23 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/06/16 16:37:00 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/06/16 15:34:02 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +95,7 @@ char **cmd_unset(char **spli, char **env)
 	tmp = ft_cp_env(env);
 	i = 0;
 	while (tmp[i])
-	{
+	{//A MODIFIER, MALLOC
 		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0
 			&& (tmp[i][ft_strlen(spli[1])] == '='))
 		{
@@ -116,6 +117,8 @@ int	ft_redirect(char **spli, char **env)
 	i = 0;
 	if (ft_strcmp(spli[0], "unset") == 0)
 	{
+		if (!spli[1])
+			return (0);
 		stock.cpenv = cmd_unset(spli, env);
 		free_spli(spli);
 		return (0);

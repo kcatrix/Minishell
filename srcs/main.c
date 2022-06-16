@@ -6,7 +6,11 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/06/16 16:30:04 by kcatrix          ###   ########.fr       */
+=======
+/*   Updated: 2022/06/16 16:20:31 by tnicoue          ###   ########.fr       */
+>>>>>>> 65c52b7f12dbe882ed2159b41e5a93c4cfc2c8e6
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +95,36 @@ void f_exit(char **spli)
 	//free_lines();
 	exit(exit_status);
 }
+
+
+/* CPexp = Export (env trie) Cpenv = environnement 
+exportadd : on va free le export actuel apres avoir cree une copie de ce dernier 
+dans cpcpenv, on remalloc le cpexp a sa longueur + 1 (parce qu on va rajouter une
+variable d environnement)
+
+Puis a l aide de strcmp et ft_preline, il va comparer les valeurs ascii des noms
+de variable d environnement avant les '=',
+ si ce resultat (nouvelle valeur - valeur pointee de exp)
+ est inferieur a 0, la nouvelle valeur se situe a l emplacement actuel
+ 
+*/
+
+
+
+
+/*i = 1 2 3 4 5 6  7  8 
+8
+
+stock.cpexp (new)
+
+	1 2 4 5 6 8 12
+i = 1 2 3 4 5 6 7
+
+
+
+
+
+	*/
+ 
+
+>>>>>>> 65c52b7f12dbe882ed2159b41e5a93c4cfc2c8e6

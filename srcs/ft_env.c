@@ -14,12 +14,17 @@ int	verifline(char *line)
 	return (1);
 }
 
+/*void	ft_recup_export()
+{
+	recuperer le export
+}*/
+
 void	ft_env(void)
 {
 	int	i;
 
 	i = 0;
-	printf("degout");
+	//ft_recup_export()
 	while (stock.cpenv[i])
 	{
 		if (verifline(stock.cpenv[i]) == 0)
