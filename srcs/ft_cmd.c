@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/16 11:44:15 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/06/16 15:34:02 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int	ft_redirect(char **spli, char **env)
 	i = 0;
 	if (ft_strcmp(spli[0], "unset") == 0)
 	{
+		if (!spli[1])
+			return (0);
 		stock.cpenv = cmd_unset(spli, env);
 		free_spli(spli);
 		return (0);

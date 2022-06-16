@@ -14,7 +14,10 @@ int	verifline(char *line)
 	return (1);
 }
 
-//void	ft_recup_export()
+/*void	ft_recup_export()
+{
+	recuperer le export
+}*/
 
 void	ft_env(void)
 {
@@ -22,7 +25,7 @@ void	ft_env(void)
 
 	i = 0;
 	//ft_recup_export()
-	while(stock.cpenv[i])
+	while (stock.cpenv[i])
 	{
 		if (verifline(stock.cpenv[i]) == 0)
 			printf("%s\n", stock.cpenv[i]);
