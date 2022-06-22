@@ -88,17 +88,18 @@ int	ft_parseexport(char *spli)
 	line = ft_preline(spli);
 	i = 0;
 	while (line[i])
-	{
-		if (ft_isalpha(line[i]) != 1)
-		{
-			printf("export : '%s': not a valid identifier", spli);
-			return (1);
-		}
 		i++;
-	}
-	return (0);
+	i--;
+	while ((i >= 0 && ft_isdigit(line[i]) == 1) || ( i >= 0 && line[i] == '_'))
+		i--;
+	if(i == -1)
+		return (1);
+	while ((i >= 0 && ft_isalpha(line[i]) == 1 ) || ( i >= 0 && line[i] == '_'))
+		i--;
+	if (i == -1)
+		return (0);
+	return (1);
 }
-
 
 int	ft_verifenv(char *spli)
 {
@@ -109,7 +110,18 @@ int	ft_verifenv(char *spli)
 	{
 		if (ft_strcmp(ft_preline(spli), ft_preline(stock.cpenv[i])) == 0)
 		{
-			stock.cpenv[i] = spli;
+			free(stock.cpenv[i]);
+			stock.cpenv[i] = ft_mallocex(spli, stock.cpenv[i]);
+			i = 0;
+			while (stock.cpexp[i])
+			{
+				if (ft_strcmp(ft_preline(spli), ft_preline(stock.cpexp[i])) == 0)
+				{
+					free(stock.cpexp[i]);
+					stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i]);
+				}
+				i++;
+			}
 			return (1);
 		}
 		i++;
@@ -261,6 +273,7 @@ int	ft_verifdoublon(char *spli)
 	int	i;
 
 	i = 0;
+	printf("kukuku\n");
 	while(stock.cpexp[i])
 	{
 		if (strcmp(ft_preline(spli), ft_preline(stock.cpexp[i])) == 0)
@@ -334,10 +347,16 @@ void	ft_exportadd(int i, char *spli)
 
 	y = 0;
 	z = 0;
+	printf("avantverifdoublon\n");
 	if (ft_verifdoublon(spli) == 0)
+	{
+		printf("verifdoublon\n");
 		return ;
+	}
+	printf("ufdp\n");
 	cpcpexp = ft_mallocexportadd();
 	ft_exptoenv(spli);
+	printf("ufdp\n");
 	while (cpcpexp[i])
 		{
 			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpexp[i])) < 0)
@@ -371,6 +390,7 @@ void	ft_export(char **spli)
 	int	i;
 
 	i = 0;
+	printf("debutexport\n");
 	if (!stock.cpexp)
 	{
 		while(stock.cpenv[i])
@@ -389,9 +409,16 @@ void	ft_export(char **spli)
 	else
 	{	
 		if (ft_parseexport(spli[1]) == 1)
+		{
+			printf("parseexport\n");
 			return;
+		}
 		else if (ft_verifenv(spli[1]) == 1)
+		{
+			printf("verifnev\n");
 			return;
+		}
+		printf("preadd\n");
 		ft_exportadd(i, spli[1]);
 	}
 }

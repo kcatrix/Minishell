@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/16 16:37:00 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/06/22 12:44:20 by kevyn            ###   ########.fr       */
 /*   Updated: 2022/06/16 15:34:02 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -92,7 +92,13 @@ char **cmd_unset(char **spli, char **env)
 	int		i;
 	char	**tmp;
 
+	i = 0;
 	tmp = ft_cp_env(env);
+	free_spli(env);
+	free(env);
+	while (tmp[i])
+		i++;
+	env = malloc(sizeof(char *) * i);
 	i = 0;
 	while (tmp[i])
 	{//A MODIFIER, MALLOC
@@ -101,10 +107,12 @@ char **cmd_unset(char **spli, char **env)
 		{
 			while(tmp[i])
 			{
-				tmp[i] = tmp[i + 1];
+				tmp[i] = ft_mallocex(tmp[i + 1], tmp[i]);
 				i++;
 			}
+			return (tmp);
 		}
+		env[i] = ft_mallocex(tmp[i], env[i]);
 		i++;
 	}
 	return (tmp);
@@ -119,7 +127,8 @@ int	ft_redirect(char **spli, char **env)
 	{
 		if (!spli[1])
 			return (0);
-		stock.cpenv = cmd_unset(spli, env);
+		stock.cpenv = cmd_unset(spli, stock.cpenv);
+		stock.cpexp = cmd_unset(spli, stock.cpexp);
 		free_spli(spli);
 		return (0);
 	}
