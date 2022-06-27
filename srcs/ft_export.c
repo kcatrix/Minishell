@@ -190,7 +190,10 @@ char	*ft_mallocex(char *str, char *str2)
 
 	i = 0;
 	
+	if (str == NULL)
+		return(str);
 	str2 = malloc(sizeof(char) * (ft_strlen(str) + 1));
+	printf("oerkgokegr\n");
 	while(str[i])
 	{
 		str2[i] = str[i];

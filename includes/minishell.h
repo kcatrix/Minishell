@@ -38,6 +38,8 @@ void	ft_pwd(void);
 void	ft_env(void);
 void    free_spli(char **spli);
 void 	f_exit(char **spli);
+void	ft_verif_chevron(char **spli);
+//void	ft_chevron_redirect(char **spli, int i);
 char	*ft_mallocex(char *str, char *str2);
 
 typedef struct s_stock

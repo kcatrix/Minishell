@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/22 12:44:20 by kevyn            ###   ########.fr       */
-/*   Updated: 2022/06/16 15:34:02 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/06/27 14:16:06 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -90,31 +90,37 @@ char **ft_cp_env(char **env)
 char **cmd_unset(char **spli, char **env)
 {
 	int		i;
+	int		y;
 	char	**tmp;
 
 	i = 0;
+	y = 0;
 	tmp = ft_cp_env(env);
 	free_spli(env);
 	free(env);
 	while (tmp[i])
 		i++;
+	printf("i = %d\n", i);
+	printf("jean\n");
 	env = malloc(sizeof(char *) * i);
 	i = 0;
 	while (tmp[i])
 	{//A MODIFIER, MALLOC
-		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0
-			&& (tmp[i][ft_strlen(spli[1])] == '='))
+		printf("%d i\n", i);
+		printf("bon\n");
+		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0 
+			&& (tmp[i][ft_strlen(spli[1])] == '=') && printf("JPPALED\n"))
 		{
-			while(tmp[i])
-			{
-				tmp[i] = ft_mallocex(tmp[i + 1], tmp[i]);
-				i++;
-			}
+			printf("JPPALED\n");
+			while(tmp[i][y] != '=')
+				y++;
+			tmp[i][y] = '\0';
+			printf("a rien\n");
 			return (tmp);
 		}
-		env[i] = ft_mallocex(tmp[i], env[i]);
 		i++;
 	}
+	printf("du tout\n");
 	return (tmp);
 }
 
@@ -184,6 +190,7 @@ int	ft_cmd(char *line, char **env)
 	spli = ft_split(line, ' ');
 	//split
 	spli = parse(spli);
+	ft_verif_chevron(spli);
 	if (ft_redirect(spli, env) == 0)
 	{
 		free_spli(path);

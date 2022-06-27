@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
+#    By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/06/13 14:42:12 by kevyn            ###   ########.fr        #
+#    Updated: 2022/06/27 12:58:42 by kcatrix          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJECTS	= ./bin
  
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
-SRCS = main.c ft_cmd.c ft_cd_and_echo.c parse.c ft_export.c ft_pwd.c ft_env.c
+SRCS = main.c ft_cmd.c ft_cd_and_echo.c parse.c ft_export.c ft_pwd.c ft_env.c ft_chevron.c
 
 RM = rm -f
 
