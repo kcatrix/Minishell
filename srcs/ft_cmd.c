@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/06/27 14:16:06 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/07/19 15:55:23 by kevyn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,41 +87,69 @@ char **ft_cp_env(char **env)
 
 // securitee a rajouter pour verifier l existence du parametre au sein de l env
 // stocker les differents parametre dans un tableau
-char **cmd_unset(char **spli, char **env)
+int ft_strlendouble(char **strdouble)
+{
+	int	i;
+
+	i = 0;
+	while (strdouble[i])
+		i++;
+	return(i);
+}
+
+int	ft_verifexistunset(char **env, char **spli)
+{
+	int 	i;
+
+	i = 0;
+	while(env[i])
+	{
+		if (ft_strcmp(ft_preline(env[i]), ft_preline(spli[1])) == 0)
+			return(0);
+		i++;
+	}
+	return (1);
+}
+char	**cmd_unset(char **spli, char **env)
 {
 	int		i;
 	int		y;
 	char	**tmp;
-
+	
 	i = 0;
 	y = 0;
+	if (ft_verifexistunset(env, spli) == 1)
+		return (env);
 	tmp = ft_cp_env(env);
-	free_spli(env);
-	free(env);
-	while (tmp[i])
-		i++;
-	printf("i = %d\n", i);
-	printf("jean\n");
-	env = malloc(sizeof(char *) * i);
-	i = 0;
+	//Verif existe avec ft_preline sur le spli 1 et chacunes des lignes de l'env ou exp puis remalloc si nécessaire et continuer dans la fonction, sinon, quitter la fonction
 	while (tmp[i])
 	{//A MODIFIER, MALLOC
-		printf("%d i\n", i);
-		printf("bon\n");
-		if (ft_memcmp(tmp[i], spli[1], ft_strlen(spli[1])) == 0 
-			&& (tmp[i][ft_strlen(spli[1])] == '=') && printf("JPPALED\n"))
+		printf("i = %d", i);
+		if (ft_memcmp(env[i], spli[1], ft_strlen(spli[1])) == 0 
+			&& ((env[i][ft_strlen(spli[1])] == '=') || (env[i][ft_strlen(spli[1])] == '\0')))
 		{
 			printf("JPPALED\n");
-			while(tmp[i][y] != '=')
-				y++;
-			tmp[i][y] = '\0';
+			printf("%s nnnnn\n", tmp[i + 1]);
+			while(tmp[i + 1])
+			{
+				printf("%s\n", env[i]);
+				free(env[i]);
+				printf("oui\n");
+				env[i] = ft_mallocex(tmp[i + 1], env[i]);
+				free(tmp[i + 1]);
+				i++;
+			}
+			env[i] = NULL;
 			printf("a rien\n");
-			return (tmp);
+			return (env);
 		}
+		env[i] = ft_mallocex(tmp[i], env[i]);
+		free(tmp[i]);
 		i++;
 	}
 	printf("du tout\n");
-	return (tmp);
+	free(tmp);
+	return (env);
 }
 
 int	ft_redirect(char **spli, char **env)

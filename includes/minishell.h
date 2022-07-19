@@ -39,8 +39,11 @@ void	ft_env(void);
 void    free_spli(char **spli);
 void 	f_exit(char **spli);
 void	ft_verif_chevron(char **spli);
+char 	*ft_preline(char *line);
 //void	ft_chevron_redirect(char **spli, int i);
 char	*ft_mallocex(char *str, char *str2);
+char	**ft_mallocunset(char **stockset);
+int		ft_strlendouble(char **strdouble);
 
 typedef struct s_stock
 {

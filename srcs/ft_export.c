@@ -26,6 +26,7 @@ char	**ft_exportaff(char *line, char **newline)
 		}
 		i++;
 	}
+	newline[0][i] = '\0';
 	return (newline);
 }
 
@@ -127,6 +128,37 @@ int	ft_verifenv(char *spli)
 		i++;
 	}
 	return (0);
+}
+
+char	**ft_mallocunset(char **stockset)
+{
+	int		i;
+	int		y;
+	char	**cpcpenv;
+
+	i = 0;
+	y = 0;
+	while(stockset[i])
+		i++;
+	cpcpenv = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while(stockset[i])
+	{
+		cpcpenv[i] = malloc(sizeof(char) * ft_strlen(stockset[i]) + 1);
+		while(stockset[i][y])
+		{
+			cpcpenv[i][y] = stockset[i][y];
+			y++;
+		}
+		cpcpenv[i][y] = '\0';
+		y = 0;
+		free(stockset[i]);
+		i++;
+	}
+	cpcpenv[i] = NULL;
+	free(stock.cpexp);
+	stock.cpexp = malloc(sizeof(char *) * (i + 2));
+	return (cpcpenv);
 }
 
 char	**ft_mallocexportadd(void)
@@ -350,26 +382,24 @@ void	ft_exportadd(int i, char *spli)
 
 	y = 0;
 	z = 0;
-	printf("avantverifdoublon\n");
 	if (ft_verifdoublon(spli) == 0)
 	{
-		printf("verifdoublon\n");
 		return ;
 	}
-	printf("ufdp\n");
 	cpcpexp = ft_mallocexportadd();
 	ft_exptoenv(spli);
-	printf("ufdp\n");
 	while (cpcpexp[i])
 		{
 			if (ft_strcmp(ft_preline(spli), ft_preline(cpcpexp[i])) < 0)
 			{
 				stock.cpexp[i] = ft_mallocex(spli, stock.cpexp[i]);
+				printf("cpex =%s\n", stock.cpexp[i]);
 				y = i;
 				i++;
 				while (cpcpexp[y])
 				{
 					stock.cpexp[i] = ft_mallocex(cpcpexp[y], stock.cpexp[i]);
+					printf("cpex =%s\n", stock.cpexp[i]);
 					free(cpcpexp[y]);
 					y++;
 					i++;
