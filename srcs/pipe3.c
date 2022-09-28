@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 07:03:23 by exostiv           #+#    #+#             */
-/*   Updated: 2022/09/23 02:05:27 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:02:51 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,39 @@ char	*ft_replace_quote(char *spli)
 	tmp[i] = '\0';
 	free(spli);
 	return (tmp);
+}
+
+void	fixcd(void)
+{
+	int	in;
+	int	id;
+
+	pipe(g_stock.pip);
+	in = g_stock.pip[0];
+	id = fork();
+	if (id == 0)
+	{
+		ft_pipe2(in);
+		exit(0);
+	}
+	else
+	{
+		fixwait(id);
+		return ;
+	}
+	return ;
+}
+
+int	ft_arn(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != 32 && line[i] != '\0')
+			return (0);
+		i++;
+	}
+	return (1);
 }

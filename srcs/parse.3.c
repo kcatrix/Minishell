@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:17:31 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/23 02:54:19 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:44:55 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*arn_creat(char *line, int i, int y)
 	char	**spli;
 
 	spli = NULL;
-	if (ft_strncmp("cat", line, 3) == 0 && line[3] != '\0')
+	if (ft_strncmp("cat", line, 3) == 0 && ft_arn(line + 3) == 0)
 	{
 		spli = ft_split(line, ' ');
 		while ((spli[i][0] == '|' && spli[i][1] == '\0')

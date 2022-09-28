@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_and_echo.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:13:17 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/27 12:20:01 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/28 15:15:34 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void	cmd_cd(char **spli)
 {
 	char	**unparun;
 
+	if (g_stock.nbpip > 0)
+	{
+		fixcd();
+		return ;
+	}
 	if (spli[1])
 		unparun = ft_split(spli[1], '/');
 	if (!spli[1])

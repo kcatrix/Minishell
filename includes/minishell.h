@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/27 13:03:12 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/28 16:24:54 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,11 @@ char	*ft_replace_existe_val_end(char *spli, int y, int i, char *tmp2);
 char	*ft_replace_existe_val_boucle(char *tmp);
 char	*ft_add_cote(char *spli, int y, int i, char *tmp);
 char	*ft_add_cote2(char *spli, int y, int i, char *tmp);
+int		ft_modifdirdotdot(void);
+int		ft_verifdirexist(void);
+char	*getpwd(void);
+void	fixcd(void);
+int		ft_arn(char *line);
 typedef struct s_stock
 {
 	char	**cpenv;
@@ -181,6 +186,8 @@ typedef struct s_stock
 	int		arn;
 	int		arn2;
 	int		j;
+	int		vid;
+	int		pip2[2];
 }	t_stock;
 
 t_stock	g_stock;

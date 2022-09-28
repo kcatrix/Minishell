@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/23 02:57:46 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/28 16:22:49 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	ft_cmd(char *line, char **env)
 	int		i;
 
 	i = 0;
+	g_stock.vid = 0;
 	init_var_cmd(line);
 	if (!line || !ft_strlen(line))
 		return (0);

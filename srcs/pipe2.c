@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 02:38:58 by exostiv           #+#    #+#             */
-/*   Updated: 2022/09/22 07:11:02 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:03:07 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	fixwait(int id)
 void	fixwaitexp(int id, char **spli, int i)
 {
 	waitpid(id, 0, 0);
-	if (spli[1])
+	if (spli[1] && g_stock.nbpip == 0)
 	{
 		if (ft_parseexport(spli[1]) == 1)
 			return ;
@@ -66,7 +66,7 @@ void	fixechopip(int in, char **spli, int i)
 
 char	**fixunsetpip(char **env, char**spli, char **tmp, int i)
 {
-	if (ft_verifexistunset(env, spli) == 1)
+	if (ft_verifexistunset(env, spli) == 1 || g_stock.nbpip != 0)
 	{
 		if (g_stock.out > 1)
 			close(g_stock.out);

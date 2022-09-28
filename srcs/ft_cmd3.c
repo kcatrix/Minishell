@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/22 07:41:52 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:31:02 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	ft_exec(char **spli, char **path, char **env, int i)
 	}
 	else
 	{
+		g_stock.fork = id;
 		waitpid(id, 0, 0);
 		close(g_stock.pip[1]);
 		if (g_stock.out > 1)

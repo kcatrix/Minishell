@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_and_echo3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:03:28 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/15 16:30:51 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/28 14:08:07 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	cmd_cd_dot_dot(void)
 	int	i;
 
 	i = 0;
+	if (ft_verifdirexist() == 1)
+		ft_modifdirdotdot();
 	if (chdir("..") == -1)
 		return ;
 	while (g_stock.cpenv[i])
@@ -33,9 +35,7 @@ void	cmd_cd_dot_dot(void)
 	while (g_stock.cpenv[i])
 	{
 		if (ft_memcmp(g_stock.cpenv[i], "PWD=", 4) == 0)
-		{
 			g_stock.cpenv[i] = ft_chk_last_path(g_stock.cpenv[i]);
-		}
 		i++;
 	}
 }

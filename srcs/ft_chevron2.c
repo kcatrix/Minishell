@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chevron2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:03:11 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/12 06:21:59 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/28 17:05:06 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 int	heredoc(char **spli, int i)
 {
 	char	*line;
-	int		pipes[2];
 
-	pipe(pipes);
+	pipe(g_stock.pip2);
 	while (1)
 	{
 		line = readline(">");
@@ -25,11 +24,11 @@ int	heredoc(char **spli, int i)
 		{
 			del_i(spli, i);
 			free(line);
-			close(pipes[1]);
-			return (pipes[0]);
+			close(g_stock.pip2[1]);
+			return (g_stock.pip2[0]);
 		}
-		write(pipes[1], line, ft_strlen(line));
-		write(pipes[1], "\n", 1);
+		write(g_stock.pip2[1], line, ft_strlen(line));
+		write(g_stock.pip2[1], "\n", 1);
 		free(line);
 	}
 }
