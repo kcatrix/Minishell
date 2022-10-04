@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:17:31 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/28 15:44:55 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/04 09:54:51 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	verif_arn(void)
 {
 	char	*line;
 
+	g_stock.fork = 0;
 	if (g_stock.arn > 0)
 	{
 		while (g_stock.arn != 0)

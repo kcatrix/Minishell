@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:45:21 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/05 15:40:34 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/09/29 12:13:35 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,39 +95,3 @@ void	skip(char *str, size_t *i)
 		(*i)++;
 	(*i)++;
 }
-
-/*char **ft_sup_dollar(char **spli, int y)
-{
-	char **spli2;
-	int i;
-
-	i = 0;
-	while(spli[i])
-		printf("spli = %s\n", spli[i++]);
-	printf("i = %d\n", i);
-	spli2 = malloc(sizeof (char *) * i);
-	i = 0;
-	while(spli[i])
-	{
-		if (i == y)
-		{
-			free(spli[i]);
-			i++;
-		}	
-		spli2[i] = ft_mallocex(spli[i], spli2[i]);
-		printf("spli2[i] = %s , i = %d\n", spli2[i], i);
-		free(spli[i]);
-		y++;
-		i++;
-	}
-	printf(" = %s\n", spli2[0]);
-	spli2[i] = NULL;
-	free(spli);
-	return (spli2);
-}*/
-
-// $DELAMERDE LS
-//$PATH LS
-
-//patch dollar decendre spli **
-//fonction qui check les $ jusqu'à une fonction

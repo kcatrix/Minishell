@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/28 16:24:54 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/09/29 11:33:18 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ int		ft_verifdirexist(void);
 char	*getpwd(void);
 void	fixcd(void);
 int		ft_arn(char *line);
+void	interrupt_signal_heredoc(int signal);
 typedef struct s_stock
 {
 	char	**cpenv;

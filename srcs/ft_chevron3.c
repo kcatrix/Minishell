@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chevron3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 16:12:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/01 16:13:54 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:13:07 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	ft_chevron_droite(char **spli, int i)
 	y = 0;
 	file = open(spli[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	spli = del_i(spli, i);
-	while (spli[y])
-		printf("spli = %s\n", spli[y++]);
 	return (file);
 }
 
@@ -30,7 +28,6 @@ int	ft_chevron_gauche(char **spli, int i, int y)
 	int	file;
 
 	file = open(spli[i + 1], O_WRONLY, 0777);
-	printf("file = %d\n", file);
 	if (file < 0)
 	{
 		close(y);

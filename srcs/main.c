@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kevyn <kevyn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/22 14:20:11 by kevyn            ###   ########.fr       */
+/*   Updated: 2022/10/04 09:57:15 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,16 @@ void	f_exit(char **spli)
 	{
 		if (is_num(spli[1]) == 1)
 		{
+			printf("exit\n");
 			printf("minishell: exit: %s: numeric argument required\n",
 				spli[1]);
-			return ;
+			g_stock.end = 255;
+			exit(g_stock.end);
 		}
 		if (spli[2])
 		{
 			printf("minishell: exit: too many arguments\n");
+			g_stock.end = 1;
 			return ;
 		}
 		exit_status = ft_atoi(spli[1]);

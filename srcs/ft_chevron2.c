@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 15:03:11 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/28 17:05:06 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:20:57 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	heredoc(char **spli, int i)
 {
 	char	*line;
 
+	g_stock.vid = 2;
 	pipe(g_stock.pip2);
 	while (1)
 	{

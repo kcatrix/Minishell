@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   signal copy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:08:29 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/28 14:32:31 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:13:51 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	quit_signal(int signum)
 	{
 		kill(g_stock.fork, signum);
 		if (signum == SIGQUIT)
-			printf("Quit: 3\n");
+			printf("^\\Quit: 3\n");
 		g_stock.fork = 0;
 		return ;
 	}

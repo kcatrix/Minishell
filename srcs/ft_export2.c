@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: exostiv <exostiv@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:03:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/22 06:45:53 by exostiv          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:21:18 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	ft_verifdoublon(char *spli)
 		preexp = ft_preline(g_stock.cpexp[i]);
 		if (strcmp(prespli, preexp) == 0)
 		{
-			printf("doublon\n");
 			if (ft_verifspli(spli) != 0)
 				g_stock.cpexp[i] = ft_mallocex(spli, g_stock.cpexp[i]);
 			free(prespli);
@@ -103,7 +102,6 @@ int	ft_verifdoublon(char *spli)
 		free(preexp);
 		i++;
 	}
-	printf("doublonno\n");
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/09/28 16:22:49 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/04 10:15:24 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int	ft_redirect(char **spli)
 	}
 	if (ft_redirect_2(spli) == 0)
 	{
-		g_stock.end = 0;
+		if (ft_strcmp(spli[0], "exit") != 0)
+			g_stock.end = 0;
 		return (0);
 	}
 	return (1);

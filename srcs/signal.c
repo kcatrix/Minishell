@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:08:29 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/28 17:02:53 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/09/29 12:14:01 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,11 @@ void	quit_signal(int signum)
 	{
 		kill(g_stock.fork, signum);
 		if (signum == SIGQUIT)
-			printf("Quit: 3\n");
+			printf("^\\Quit: 3\n");
 		g_stock.fork = 0;
 		return ;
 	}
-	else if (g_stock.vid == 2)
-	{
-		g_stock.vid = 1;
-	}
-	else if (signum == 11 && g_stock.vid == 0)
+	if (signum == 11)
 	{
 		printf("exit\n");
 		exit(0);
