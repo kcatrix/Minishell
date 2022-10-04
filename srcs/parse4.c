@@ -6,7 +6,7 @@
 /*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 14:38:26 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/04 14:45:01 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/04 15:41:32 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ char	*verif_pipe_end(char *line)
 	if (verif_pipe(line) == 0)
 	{
 		printf("bash: syntax error near unexpected token `|'\n");
-		return (NULL);
+		free(line);
+		return (" ");
 	}
 	while (line[i])
 		i++;
@@ -55,7 +56,7 @@ char	*verif_pipe_end2(char *line, int i, char *tmp)
 		g_stock.ll = 1;
 		while (1)
 		{
-			tmp = readline(">");
+			tmp = readline("> ");
 			if (verif_tmp(tmp) == 0)
 			{
 				tmp2 = ft_mallocex(line, tmp2);

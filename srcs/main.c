@@ -6,7 +6,7 @@
 /*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/04 14:45:56 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/04 15:40:36 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **env)
 		verif_arn();
 		if ((g_stock.nbpassage == 0) && (g_stock.nbpip == 0))
 		{
-			line = readline("minishell >");
+			line = readline("minishell > ");
 			add_history(line);
 			line = verif_pipe_end(line);
 		}
