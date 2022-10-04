@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/04 11:42:38 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:15:11 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int ac, char **av, char **env)
 		{
 			line = readline("minishell >");
 			add_history(line);
+			line = verif_pipe_end(line);
 		}
 		ft_cmd (line, env);
 		if ((g_stock.nbpassage) == g_stock.nbpip + 1)

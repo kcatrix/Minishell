@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 11:48:32 by kevyn             #+#    #+#             */
-/*   Updated: 2022/09/28 15:31:02 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:10:54 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ void	init_var_cmd(char *line)
 	g_stock.chkcrash = 0;
 	g_stock.in = 0;
 	g_stock.out = 1;
-	line = arn_creat(line, i, y);
+	if (line)
+		line = arn_creat(line, i, y);
 	g_stock.chks = 0;
-	g_stock.line2 = ft_split_pipe(line, '|');
+	if (line)
+		g_stock.line2 = ft_split_pipe(line, '|');
 	if (g_stock.chkpospip)
 		free(g_stock.chkpospip);
 }

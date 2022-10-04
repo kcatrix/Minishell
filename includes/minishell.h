@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/09/29 11:33:18 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:24:32 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,10 @@ char	*getpwd(void);
 void	fixcd(void);
 int		ft_arn(char *line);
 void	interrupt_signal_heredoc(int signal);
+int		verif_pipe(char *line);
+char	*verif_pipe_end(char *line);
+int 	verif_tmp(char *tmp);
+char	*verif_pipe_end2(char *line, int i, char *tmp);
 typedef struct s_stock
 {
 	char	**cpenv;
@@ -188,6 +192,7 @@ typedef struct s_stock
 	int		arn2;
 	int		j;
 	int		vid;
+	int 	ll;
 	int		pip2[2];
 }	t_stock;
 
