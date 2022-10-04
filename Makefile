@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+         #
+#    By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/07 21:50:04 by tnicoue           #+#    #+#              #
-#    Updated: 2022/09/28 11:40:37 by tnicoue          ###   ########.fr        #
+#    Updated: 2022/10/04 14:39:28 by kcatrix          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = main.c ft_cmd.c ft_cd_and_echo.c parse.c \
 		ft_cmd3.c ft_export5.c parse.3.c pipe.c ft_cmd4.c \
 		ft_cd_and_echo4.c ft_split_pipe.c ft_split_pipe2.c \
 		pipe2.c pipe3.c ft_export6.c ft_cd_end_echo5.c \
-		ft_cd_and_echo6.c ft_cd_and_echo7.c 
+		ft_cd_and_echo6.c ft_cd_and_echo7.c parse4.c
 		
 RM = rm -f
 

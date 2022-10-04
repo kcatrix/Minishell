@@ -6,7 +6,7 @@
 /*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:50 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/04 14:15:11 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:45:56 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,7 @@ int	main(int ac, char **av, char **env)
 		}
 		ft_cmd (line, env);
 		if ((g_stock.nbpassage) == g_stock.nbpip + 1)
-		{
-			free_spli(g_stock.line2);
-			free(line);
-			g_stock.nbpassage = 0;
-			g_stock.nbpip = 0;
-		}
+			ft_main_end(line);
 		else
 			free_spli(g_stock.line2);
 	}

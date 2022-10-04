@@ -6,7 +6,7 @@
 /*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/04 14:12:48 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:33:33 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_spli(char **spli)
 	int	i;
 
 	i = 0;
-	if(!spli)
+	if (!spli)
 		return ;
 	while (spli[i])
 	{

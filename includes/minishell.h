@@ -6,7 +6,7 @@
 /*   By: kcatrix <kcatrix@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 13:57:59 by kcatrix           #+#    #+#             */
-/*   Updated: 2022/10/04 14:24:32 by kcatrix          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:46:31 by kcatrix          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,9 @@ int		ft_arn(char *line);
 void	interrupt_signal_heredoc(int signal);
 int		verif_pipe(char *line);
 char	*verif_pipe_end(char *line);
-int 	verif_tmp(char *tmp);
+int		verif_tmp(char *tmp);
 char	*verif_pipe_end2(char *line, int i, char *tmp);
+void	ft_main_end(char *line);
 typedef struct s_stock
 {
 	char	**cpenv;
@@ -192,7 +193,7 @@ typedef struct s_stock
 	int		arn2;
 	int		j;
 	int		vid;
-	int 	ll;
+	int		ll;
 	int		pip2[2];
 }	t_stock;
 
