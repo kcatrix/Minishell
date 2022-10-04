@@ -5,3 +5,8 @@ Fix unset qui cree du vide
 fix quotes
 
 fix exit
+
+
+Min = push minishell
+
+Fixmin = tests;

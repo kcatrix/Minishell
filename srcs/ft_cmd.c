@@ -6,7 +6,7 @@
 /*   By: tnicoue <tnicoue@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 10:38:47 by tnicoue           #+#    #+#             */
-/*   Updated: 2022/10/04 10:15:24 by tnicoue          ###   ########.fr       */
+/*   Updated: 2022/10/04 11:45:36 by tnicoue          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_spli(char **spli)
 	int	i;
 
 	i = 0;
+	if(!spli)
+		return ;
 	while (spli[i])
 	{
 		free(spli[i]);
